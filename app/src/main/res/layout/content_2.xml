@@ -9,4 +9,11 @@
         tools:showIn="@layout/activity_2"
         tools:context=".Activity2" android:background="#FFFF00E2">
 
+    <TextView
+            android:text="TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView" app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="214dp" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="175dp"
+            android:layout_marginRight="175dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

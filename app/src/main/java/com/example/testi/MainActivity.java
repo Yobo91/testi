@@ -2,6 +2,7 @@ package com.example.testi;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.EditText;
 import android.widget.Toast;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -24,6 +25,9 @@ public class MainActivity extends AppCompatActivity {
     public void myonClick(View view) {
         Intent i = new Intent(this, Activity2.class);
 
+        final EditText editIt = (EditText) findViewById(R.id.editText);
+        String msg = editIt.getText().toString();
+        i.putExtra("msg", msg);
         startActivity(i);
     }
 
