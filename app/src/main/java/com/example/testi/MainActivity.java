@@ -22,6 +22,13 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
     }
 
+    public void myonClick2(View view) {
+        Intent i = new Intent();
+        i.setAction("com.example.testi");
+        i.addFlags(Intent.FLAG_INCLUDE_STOPPED_PACKAGES);
+        sendBroadcast(i);
+    }
+
     public void myonClick(View view) {
         Intent i = new Intent(this, Activity2.class);
 
