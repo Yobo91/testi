@@ -1,9 +1,12 @@
 package com.example.testi;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.EditText;
 import android.widget.Toast;
+import androidx.appcompat.app.AlertDialog;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,13 +26,25 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void myonClick2(View view) {
-        Intent i = new Intent();
-        i.setAction("com.example.testi");
-        i.addFlags(Intent.FLAG_INCLUDE_STOPPED_PACKAGES);
-        sendBroadcast(i);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Ganze Menschheit auslöschen?");
+        builder.setPositiveButton("Ja, alles töten!", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(MainActivity.this, "Kill everybody!", Toast.LENGTH_LONG).show();
+            }
+        });
+        builder.setNegativeButton("Nein, ich will leben!", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(MainActivity.this, "Du hast überlebt!", Toast.LENGTH_SHORT).show();
+            }
+        });
+        builder.create().show();
     }
 
     public void myonClick(View view) {
+        Log.d("myonClick", "created Intent");
         Intent i = new Intent(this, Activity2.class);
 
         final EditText editIt = (EditText) findViewById(R.id.editText);
