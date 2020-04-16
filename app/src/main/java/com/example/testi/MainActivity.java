@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void myonClick3(View view) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Ganze Menschheit auslöschen?");
+        builder.setTitle("Hintergrundfarbe wählen");
         String[] elements = {"Gelb", "Grün"};
         builder.setSingleChoiceItems(elements, -1, new DialogInterface.OnClickListener() {
             @Override
