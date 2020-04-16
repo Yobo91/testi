@@ -2,6 +2,7 @@ package com.example.testi;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.EditText;
@@ -28,6 +29,64 @@ public class MainActivity extends AppCompatActivity {
     public void myonClick2(View view) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Ganze Menschheit auslöschen?");
+        String[] elements = {"Gelb", "Grün"};
+        builder.setMultiChoiceItems(elements, null, new DialogInterface.OnMultiChoiceClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+                switch (which) {
+                    case 0:
+                        if(isChecked){
+                            findViewById(R.id.rel).setBackgroundColor(Color.YELLOW);
+                        }
+                        break;
+                    case 1:
+                        if(isChecked){
+                            findViewById(R.id.rel).setBackgroundColor(Color.GREEN);
+                        } else {
+                            findViewById(R.id.rel).setBackgroundColor(Color.RED);
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            }
+        });
+
+        builder.setPositiveButton("Ja, alles töten!", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(MainActivity.this, "Kill everybody!", Toast.LENGTH_LONG).show();
+            }
+        });
+        builder.setNegativeButton("Nein, ich will leben!", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(MainActivity.this, "Du hast überlebt!", Toast.LENGTH_SHORT).show();
+            }
+        });
+        builder.create().show();
+    }
+
+    public void myonClick3(View view) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Ganze Menschheit auslöschen?");
+        String[] elements = {"Gelb", "Grün"};
+        builder.setSingleChoiceItems(elements, -1, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                switch (which) {
+                    case 0:
+                        findViewById(R.id.rel).setBackgroundColor(Color.YELLOW);
+                        break;
+                    case 1:
+                        findViewById(R.id.rel).setBackgroundColor(Color.GREEN);
+                        break;
+                    default:
+                        break;
+                }
+            }
+        });
+
         builder.setPositiveButton("Ja, alles töten!", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {

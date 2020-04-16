@@ -7,7 +7,7 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         tools:showIn="@layout/activity_main"
-        tools:context=".MainActivity" android:background="#00FF00">
+        tools:context=".MainActivity" android:background="#00FF00" android:id="@+id/rel">
 
     <Button
             android:text="Switch"
@@ -31,5 +31,13 @@
             android:id="@+id/button2" app:layout_constraintTop_toTopOf="parent"
             android:layout_marginTop="56dp" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="166dp"
             android:layout_marginRight="166dp" android:onClick="myonClick2"/>
+    <Button
+            android:text="Button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/button3" android:layout_marginTop="3dp"
+            app:layout_constraintTop_toBottomOf="@+id/button2" android:onClick="myonClick3"
+            app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="166dp"
+            android:layout_marginRight="166dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
