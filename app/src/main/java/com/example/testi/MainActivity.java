@@ -86,19 +86,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-
-        builder.setPositiveButton("Ja, alles töten!", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(MainActivity.this, "Kill everybody!", Toast.LENGTH_LONG).show();
-            }
-        });
-        builder.setNegativeButton("Nein, ich will leben!", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(MainActivity.this, "Du hast überlebt!", Toast.LENGTH_SHORT).show();
-            }
-        });
         builder.create().show();
     }
 
