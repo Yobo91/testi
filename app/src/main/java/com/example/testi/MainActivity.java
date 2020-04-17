@@ -24,6 +24,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        MyIntentService.startActionBaz(this, "param1", "param2");
     }
 
     public void myonClick2(View view) {
