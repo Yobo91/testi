@@ -39,5 +39,12 @@
             app:layout_constraintTop_toBottomOf="@+id/button2" android:onClick="myonClick3"
             app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="166dp"
             android:layout_marginRight="166dp"/>
+    <TextView
+            android:text="testi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView2" app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="40dp" app:layout_constraintEnd_toStartOf="@+id/button2"
+            android:layout_marginEnd="33dp" android:layout_marginRight="33dp" android:onClick="show"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,9 +1,9 @@
 package com.example.testi;
 
-import android.content.DialogInterface;
-import android.content.Intent;
+import android.content.*;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.util.Log;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -17,6 +17,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 public class MainActivity extends AppCompatActivity {
+    MyService servMe;
+    boolean isBound = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,8 +26,28 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        //MyIntentService.startActionBaz(this, "param1", "param2");
 
-        MyIntentService.startActionBaz(this, "param1", "param2");
+        Intent i = new Intent(this, MyService.class);
+        bindService(i, conn, Context.BIND_AUTO_CREATE);
+    }
+
+    private ServiceConnection conn = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            MyService.MyBinder bindMe = (MyService.MyBinder) service;
+            servMe = bindMe.getService();
+            isBound = true;
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+            isBound = false;
+        }
+    };
+
+    public void show(View view) {
+        Toast.makeText(this, ((Integer) servMe.compute()).toString(), Toast.LENGTH_SHORT).show();
     }
 
     public void myonClick2(View view) {
