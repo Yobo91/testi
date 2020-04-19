@@ -2,11 +2,12 @@ package com.example.testi;
 
 import android.content.*;
 import android.graphics.Color;
-import android.os.Bundle;
-import android.os.IBinder;
+import android.os.*;
 import android.util.Log;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -17,8 +18,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 public class MainActivity extends AppCompatActivity {
-    MyService servMe;
-    boolean isBound = false;
+
+    Handler handler = new Handler(Looper.getMainLooper()) {
+        @Override
+        public void handleMessage(@NonNull Message msg) {
+            TextView txt = (TextView) findViewById(R.id.txt);
+            txt.setText((String)msg.obj);
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,28 +33,27 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        //MyIntentService.startActionBaz(this, "param1", "param2");
 
-        Intent i = new Intent(this, MyService.class);
-        bindService(i, conn, Context.BIND_AUTO_CREATE);
     }
 
-    private ServiceConnection conn = new ServiceConnection() {
-        @Override
-        public void onServiceConnected(ComponentName name, IBinder service) {
-            MyService.MyBinder bindMe = (MyService.MyBinder) service;
-            servMe = bindMe.getService();
-            isBound = true;
-        }
-
-        @Override
-        public void onServiceDisconnected(ComponentName name) {
-            isBound = false;
-        }
-    };
-
-    public void show(View view) {
-        Toast.makeText(this, ((Integer) servMe.compute()).toString(), Toast.LENGTH_SHORT).show();
+    public void doSomething(View view) {
+        Runnable r = new Runnable() {
+            @Override
+            public void run() {
+                long ftr = System.currentTimeMillis() + 5000;
+                while (System.currentTimeMillis() < ftr) {
+                    synchronized (this) {
+                        try{
+                            wait(ftr - System.currentTimeMillis());
+                        }catch (Exception e) {}
+                    }
+                }
+                Message msg = handler.obtainMessage(42, "Hi from Thread x");
+                msg.sendToTarget();
+            }
+        };
+        Thread t = new Thread(r);
+        t.start();
     }
 
     public void myonClick2(View view) {
